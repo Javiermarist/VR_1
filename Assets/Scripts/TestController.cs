@@ -8,7 +8,7 @@ public class TestController : MonoBehaviour
     
     void Update()
     {
-        Debug.Log(ContarBolosCaidos());
+        
     }
     int ContarBolosCaidos()
     {
