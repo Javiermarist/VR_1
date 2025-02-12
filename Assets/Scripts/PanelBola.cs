@@ -15,7 +15,7 @@ public class PanelBola : MonoBehaviour
         if (camaraPpal != null)
         {
             transform.LookAt(camaraPpal.transform);
-            transform.Rotate(0, 180, 0);
+            transform.Rotate(0, 160, 0);
         }
     }
 }
