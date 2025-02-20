@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1948574974670421312}
+  - component: {fileID: 1491471163907331078}
   - component: {fileID: 2403350912699004310}
   - component: {fileID: 2348737812861212150}
   - component: {fileID: 5539988210553984419}
@@ -16,7 +17,7 @@ GameObject:
   - component: {fileID: 974853255869956801}
   m_Layer: 0
   m_Name: Bowling_ball1
-  m_TagString: Untagged
+  m_TagString: BowlingBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,11 +32,24 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.100508794, y: -0.24076651, z: -0.13602427, w: 0.95573366}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.003, y: 0.003, z: 0.003}
+  m_LocalScale: {x: 0.0025, y: 0.0025, z: 0.0025}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1491471163907331078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4162144666586678864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1293d4d08265fa04392d34e69347700d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyDelay: 3
 --- !u!33 &2403350912699004310
 MeshFilter:
   m_ObjectHideFlags: 0
