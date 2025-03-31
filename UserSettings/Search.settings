@@ -9,9 +9,9 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"last_search.66F56946" = ".cs"
+	"last_search.66F56946" = "BallMana"
 	"OpenInspectorPreview.66F56946" = "0"
-	"currentGroup.66F56946" = null
+	"currentGroup.66F56946" = "asset"
 }
 providers = {
 	asset = {
@@ -68,8 +68,11 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
-	".cs"
+	"BallM"
 	"GameController"
+	"GameCX"
+	"h: BallManagemen"
+	".cs"
 	"GameCO"
 ]
 searchItemFavorites = [

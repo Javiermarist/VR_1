@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class BowlingBallStand : MonoBehaviour
 {
-    public GameObject[] ballPrefabs; // Array de prefabs de bolas
-    public Transform spawnPoint; // Punto donde se generarán nuevas bolas
-    private List<GameObject> ballsInStand = new List<GameObject>(); // Lista de bolas en el soporte
-    private bool hasStarted = false; // Para evitar que se generen 2 bolas al inicio
+    public GameObject[] ballPrefabs;
+    public Transform spawnPoint;
+    private List<GameObject> ballsInStand = new List<GameObject>();
+    private bool hasStarted = false;
 
     private void Start()
     {
-        // Forzamos la generación de una bola inicial
-        SpawnBall();
-        hasStarted = true; // A partir de aquí, el sistema de detección se activa
+        StartCoroutine(SpawnInitialBalls());
+    }
+
+    private IEnumerator SpawnInitialBalls()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            SpawnBall();
+            yield return new WaitForSeconds(2f);
+        }
+        hasStarted = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,7 +46,7 @@ public class BowlingBallStand : MonoBehaviour
 
     private void CheckAndSpawnBall()
     {
-        if (!hasStarted) return; // Evitar que se generen bolas antes de tiempo
+        if (!hasStarted) return;
 
         if (ballsInStand.Count < 3) 
         {
@@ -48,8 +56,8 @@ public class BowlingBallStand : MonoBehaviour
 
     private IEnumerator SpawnBallWithDelay()
     {
-        yield return new WaitForSeconds(1f); // Pequeña pausa antes de generar
-        if (ballsInStand.Count < 3) // Verificar nuevamente
+        yield return new WaitForSeconds(1f);
+        if (ballsInStand.Count < 3)
         {
             SpawnBall();
         }
