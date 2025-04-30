@@ -5,18 +5,18 @@ public class GameController : MonoBehaviour
 {
     public int fallenPins = 0;
     public TextMeshProUGUI textFallenPins;
-    public GameObject bowlingPinsPrefab; // Prefab de Bowling_Pins que contiene los bolos.
-    public Transform spawnPoint;         // Punto donde instanciar el nuevo Bowling_Pins.
-    
-    private GameObject currentBowlingPins;  // Referencia al objeto Bowling_Pins actual
+    public TextMeshProUGUI textTotalScore;  // NUEVO: texto para mostrar el puntaje acumulado
+    public GameObject bowlingPinsPrefab;
+    public Transform spawnPoint;
 
+    private GameObject currentBowlingPins;
     private int currentTurn = 0;
+    private int totalScore = 0;  // NUEVO: puntaje acumulado
 
     private void Start()
     {
-        // Generar los bolos al principio
         SpawnBowlingPins();
-        UpdateScoreText();  // Actualiza el texto del puntaje al inicio
+        UpdateScoreText();
     }
 
     private void OnTriggerExit(Collider other)
@@ -24,29 +24,28 @@ public class GameController : MonoBehaviour
         if (other.gameObject.CompareTag("Pin"))
         {
             fallenPins++;
-            other.tag = "FallenPin"; // Cambiamos la etiqueta para evitar contarlos varias veces
-            textFallenPins.text = "Turn: " + (currentTurn + 1) + "\n" + "Score: " + fallenPins;
+            other.tag = "FallenPin";
+            UpdateScoreText();
         }
     }
 
     public void NextTurn()
     {
-        // Incrementar el turno y reiniciar los pines solo si no hemos llegado al último turno
-        if (currentTurn < 9) // Hasta el turno 10
+        if (currentTurn < 9)
         {
+            totalScore += fallenPins;  // NUEVO: sumamos al total
             currentTurn++;
-            fallenPins = 0; // Reiniciar el contador de pines caídos
-            textFallenPins.text = "Turn: " + (currentTurn + 1) + "\n" + "Score: " + fallenPins;
+            fallenPins = 0;
 
-            // Eliminar el Bowling_Pins actual y generar uno nuevo
-            Destroy(currentBowlingPins);  // Destruir el Bowling_Pins actual
-            SpawnBowlingPins();  // Generar el Bowling_Pins con los bolos
+            Destroy(currentBowlingPins);
+            SpawnBowlingPins();
 
             Debug.Log("Turno cambiado. Ahora en turno " + (currentTurn + 1));
         }
         else
         {
-            Debug.Log("Juego terminado. Puntaje final: " + GetTotalScore());
+            totalScore += fallenPins;  // Sumar última ronda
+            Debug.Log("Juego terminado. Puntaje final: " + totalScore);
         }
 
         UpdateScoreText();
@@ -54,19 +53,12 @@ public class GameController : MonoBehaviour
 
     private void SpawnBowlingPins()
     {
-        // Instanciamos un nuevo Bowling_Pins con los bolos y rotación de -90 grados en X
         currentBowlingPins = Instantiate(bowlingPinsPrefab, spawnPoint.position, Quaternion.Euler(-90f, 0f, 0f));
-    }
-
-    private int GetTotalScore()
-    {
-        // Calculamos el puntaje total de acuerdo a las reglas de bolos.
-        return fallenPins;
     }
 
     private void UpdateScoreText()
     {
-        // Actualizamos el texto para reflejar el puntaje y turno actual
-        textFallenPins.text = "Turn: " + (currentTurn + 1) + "\n" + "Score: " + fallenPins;
+        textFallenPins.text = "Turn: " + (currentTurn + 1) + "\n\nScore: " + fallenPins;
+        textTotalScore.text = "Total Score: " + totalScore;  // NUEVO
     }
 }
