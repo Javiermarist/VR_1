@@ -31,9 +31,16 @@ public class BallManagement : MonoBehaviour
         deletedBalls++;
         Debug.Log("Bola eliminada. Total eliminadas: " + deletedBalls);
 
-        if (usedBalls == 2 && deletedBalls == 2) 
+        if (usedBalls >= 2 && deletedBalls >= 2) 
         {
             Debug.Log("Ambas bolas eliminadas, cambiando de turno...");
+            usedBalls = 0;
+            deletedBalls = 0;
+            gameController.NextTurn();
+        }
+        else if (gameController.fallenPins == 10) 
+        {
+            Debug.Log("Todos los pines caídos, cambiando de turno...");
             usedBalls = 0;
             deletedBalls = 0;
             gameController.NextTurn();

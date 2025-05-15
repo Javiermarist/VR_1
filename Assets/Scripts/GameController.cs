@@ -5,13 +5,13 @@ public class GameController : MonoBehaviour
 {
     public int fallenPins = 0;
     public TextMeshProUGUI textFallenPins;
-    public TextMeshProUGUI textTotalScore;  // NUEVO: texto para mostrar el puntaje acumulado
+    public TextMeshProUGUI textTotalScore;
     public GameObject bowlingPinsPrefab;
     public Transform spawnPoint;
 
     private GameObject currentBowlingPins;
     private int currentTurn = 0;
-    private int totalScore = 0;  // NUEVO: puntaje acumulado
+    private int totalScore = 0;
 
     private void Start()
     {
@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
     {
         if (currentTurn < 9)
         {
-            totalScore += fallenPins;  // NUEVO: sumamos al total
+            totalScore += fallenPins;
             currentTurn++;
             fallenPins = 0;
 
@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            totalScore += fallenPins;  // Sumar última ronda
+            totalScore += fallenPins;
             Debug.Log("Juego terminado. Puntaje final: " + totalScore);
         }
 
@@ -59,6 +59,6 @@ public class GameController : MonoBehaviour
     private void UpdateScoreText()
     {
         textFallenPins.text = "Turn: " + (currentTurn + 1) + "\n\nScore: " + fallenPins;
-        textTotalScore.text = "Total Score: " + totalScore;  // NUEVO
+        textTotalScore.text = "Total Score: " + totalScore;
     }
 }

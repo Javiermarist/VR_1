@@ -6,6 +6,8 @@ public class BowlingBall : MonoBehaviour
     private Rigidbody rb;
     private bool isUsed = false;
     public float destroyDelay = 3f;
+    
+    public AudioSource audioPins;
 
     private void Awake()
     {
@@ -30,5 +32,14 @@ public class BowlingBall : MonoBehaviour
 
         yield return new WaitForSeconds(destroyDelay);
         Destroy(gameObject);
+    }
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Pin"))
+        {
+            print("Play audio");
+            audioPins.Play();
+        }
     }
 }
